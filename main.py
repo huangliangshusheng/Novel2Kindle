@@ -84,7 +84,7 @@ def get_novel_list(novel_list):
         gen_opf(post_list)
         gen_toc_ncx(post_list)
         gen_toc_html(post_list)
-        print("true")
+        print(1)
 
 
 def gen_post(title, content, filename):

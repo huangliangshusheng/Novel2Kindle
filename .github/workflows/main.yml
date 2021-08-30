@@ -17,6 +17,7 @@ jobs:
       - id: main
         run: | 
           OUTPUT = $(python main.py | tail - 1)
+          echo $OUTPUT
           echo "::set-output name=OUTPUT::$OUTPUT"
       - if: steps.main.outputs.OUTPUT == 1
         run: |

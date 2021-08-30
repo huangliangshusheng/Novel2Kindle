@@ -18,7 +18,7 @@ jobs:
         run: | 
           OUTPUT = $(python main.py | tail - 1)
           echo "::set-output name=OUTPUT::$OUTPUT"
-      - if: steps.main.outputs.OUTPUT == "true"
+      - if: steps.main.outputs.OUTPUT == 1
         run: |
           chmod +x kindlegen
           ./kindlegen -unicode content.opf
@@ -27,7 +27,7 @@ jobs:
           git add novel_list.json
           git commit -m "update article_list"
           git push
-      - if: steps.main.outputs.OUTPUT == "true"
+      - if: steps.main.outputs.OUTPUT == 1
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.qq.com

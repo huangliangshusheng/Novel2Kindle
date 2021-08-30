@@ -17,7 +17,6 @@ session.headers = {
 
 def get_html(url):
     response = session.get(url)
-    time.sleep(1)
     result = chardet.detect(response.content)
     response.encoding = result["encoding"]
     return etree.HTML(response.text)
@@ -41,6 +40,7 @@ def dump_json(novel_list, filename):
 
 def get_chapter_list(url, chapter_xpath, last_chapter_index):
     html = get_html(url)
+    time.sleep(1)
     chapter_list = html.xpath(chapter_xpath)[last_chapter_index:]
     for chapter in chapter_list:
         chapter_title = chapter.xpath("./child::node()")[0]
@@ -50,6 +50,7 @@ def get_chapter_list(url, chapter_xpath, last_chapter_index):
 
 def get_chapter_content(url, content_xpath):
     html = get_html(url)
+    time.sleep(1)
     content = html.xpath(content_xpath)[0]
     return etree.tostring(content, encoding="unicode", method="html", pretty_print=True)
 
@@ -99,6 +100,7 @@ def gen_post(title, content, filename):
         <body>
             <div id="section1"></div>
             <h1 id="title1" height="1em"><font size="7"><b>{title}</b></font></h1>
+            <br><br>
             {content}
         </body>
     </html>'''

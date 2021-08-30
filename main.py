@@ -1,6 +1,7 @@
 import json
 import os
-from datetime import datetime, time
+import time
+from datetime import datetime
 from urllib.parse import urljoin
 
 import cchardet as chardet

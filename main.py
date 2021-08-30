@@ -1,6 +1,6 @@
 import json
 import os
-from datetime import datetime
+from datetime import datetime, time
 from urllib.parse import urljoin
 
 import cchardet as chardet
@@ -16,6 +16,7 @@ session.headers = {
 
 def get_html(url):
     response = session.get(url)
+    time.sleep(1)
     result = chardet.detect(response.content)
     response.encoding = result["encoding"]
     return etree.HTML(response.text)

@@ -1,18 +1,16 @@
-import os
 import json
+import os
 from datetime import datetime
 from urllib.parse import urljoin
 
+import cchardet as chardet
 import requests
 from lxml import etree
-import cchardet as chardet
 
 session = requests.session()
 session.headers = {
-    "accept":
-    "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-    "user-agent":
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36",
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36",
 }
 
 
@@ -51,20 +49,19 @@ def get_chapter_list(url, chapter_xpath, last_chapter_index):
 def get_chapter_content(url, content_xpath):
     html = get_html(url)
     content = html.xpath(content_xpath)[0]
-    return etree.tostring(content,
-                          encoding="unicode",
-                          method="html",
-                          pretty_print=True)
+    return etree.tostring(content, encoding="unicode", method="html", pretty_print=True)
 
 
 def get_novel(novel):
     chapter_title_list = []
 
-    chapter_list = get_chapter_list(novel["url"], novel["chapter_xpath"],
-                                    novel["last_chapter_index"])
+    chapter_list = get_chapter_list(
+        novel["url"], novel["chapter_xpath"], novel["last_chapter_index"]
+    )
     for index, (chapter_title, chapter_url) in enumerate(chapter_list):
         chapter_content = get_chapter_content(
-            urljoin(novel["url"], chapter_url), novel["content_xpath"])
+            urljoin(novel["url"], chapter_url), novel["content_xpath"]
+        )
 
         post_name = f"html/{novel['title']}-{index}.html"
         gen_post(chapter_title, chapter_content, post_name)
@@ -77,11 +74,16 @@ def get_novel(novel):
 
 
 def get_novel_list(novel_list):
-    post_list = tuple(get_novel(novel) for novel in novel_list)
+    post_list = []
+    for novel in novel_list:
+        novel_title, chapter_title_list = get_novel(novel)
+        if len(chapter_title_list) > 0:
+            post_list.append((novel_title, chapter_title_list))
 
-    gen_opf(post_list)
-    gen_toc_ncx(post_list)
-    gen_toc_html(post_list)
+    if len(post_list) > 0:
+        gen_opf(post_list)
+        gen_toc_ncx(post_list)
+        gen_toc_html(post_list)
 
 
 def gen_post(title, content, filename):
@@ -136,7 +138,6 @@ def gen_opf(post_list):
         <item href="toc.ncx" media-type="application/x-dtbncx+xml" id="ncx"/>
         {item}
         <item href="image/cover.jpg" media-type="image/jpeg" id="cover_img" />
-        <item href="image/masthead.gif" media-type="image/gif" id="masthead"/>
     </manifest>
     <spine toc="ncx">
         <itemref idref="toc"/>
@@ -153,9 +154,6 @@ def gen_opf(post_list):
 def gen_toc_ncx(post_list):
     section_list = []
     for novel_title, chapter_title_list in post_list:
-        if len(chapter_title_list) == 0:
-            continue
-
         article_list = []
         for i, chapter_title in enumerate(chapter_title_list):
             article_list.append(f'''
@@ -175,7 +173,6 @@ def gen_toc_ncx(post_list):
             <content src="html/{novel_title}-0.html#section1" />
             {article}
         </navPoint>''')
-
     section = "\n".join(section_list)
 
     today = datetime.strftime(datetime.today(), '%Y-%m-%d')
@@ -194,8 +191,7 @@ def gen_toc_ncx(post_list):
             <text>GitHub Push</text>
         </docTitle>
         <navMap>
-            <navPoint>
-                <mbp:meta-img src="image/masthead.gif" name="mastheadImage" />
+            <navPoint class="periodical">
                 <navLabel>
                     <text>目录</text>
                 </navLabel>
@@ -211,9 +207,6 @@ def gen_toc_ncx(post_list):
 def gen_toc_html(post_list):
     section_list = []
     for novel_title, chapter_title_list in post_list:
-        if len(chapter_title_list) == 0:
-            continue
-
         article_list = []
         for i, chapter_title in enumerate(chapter_title_list):
             article_list.append(
@@ -226,7 +219,6 @@ def gen_toc_html(post_list):
         <ul>
             {article}
         </ul>''')
-
     section = "\n".join(section_list)
 
     toc = f'''

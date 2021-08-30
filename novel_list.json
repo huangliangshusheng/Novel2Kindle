@@ -1,0 +1,65 @@
+[
+    {
+        "title": "黎明之剑",
+        "url": "https://www.xuanshu.com/book/13216/",
+        "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
+        "content_xpath": "//div[@id='content1']",
+        "last_chapter_index": 1391
+    },
+    {
+        "title": "不会真有人在废土当偶像吧",
+        "url": "https://www.230book.net/book/22944/",
+        "chapter_xpath": "//ul[@class='_chapter']/li/a",
+        "content_xpath": "//div[@id='content']",
+        "last_chapter_index": 279
+    },
+    {
+        "title": "我真的好怕啊！",
+        "url": "https://www.230book.net/book/26778/",
+        "chapter_xpath": "//ul[@class='_chapter']/li/a",
+        "content_xpath": "//div[@id='content']",
+        "last_chapter_index": 121
+    },
+    {
+        "title": "这游戏也太真实了",
+        "url": "https://www.piaotianwenxue.com/book/48/48872/",
+        "chapter_xpath": "//div[@id='list-chapterAll']//a",
+        "content_xpath": "//div[@id='htmlContent']",
+        "last_chapter_index": 86
+    },
+    {
+        "title": "乱穿是一种病",
+        "url": "https://www.xuanshu.com/book/87701/",
+        "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
+        "content_xpath": "//div[@id='content1']",
+        "last_chapter_index": 129
+    },
+    {
+        "title": "盖世双谐",
+        "url": "https://www.biquwx.la/12_12313/",
+        "chapter_xpath": "//div[@id='list']//a",
+        "content_xpath": "//div[@id='content']",
+        "last_chapter_index": 272
+    },
+    {
+        "title": "我必将加冕为王",
+        "url": "https://www.230book.net/book/12602/",
+        "chapter_xpath": "//ul[@class='_chapter']/li/a",
+        "content_xpath": "//div[@id='content']",
+        "last_chapter_index": 599
+    },
+    {
+        "title": "余烬之铳",
+        "url": "https://www.xuanshu.com/book/62835/",
+        "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
+        "content_xpath": "//div[@id='content1']",
+        "last_chapter_index": 767
+    },
+    {
+        "title": "太阳系：异化",
+        "url": "https://www.xuanshu.com/book/81791/",
+        "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
+        "content_xpath": "//div[@id='content1']",
+        "last_chapter_index": 187
+    }
+]

@@ -14,12 +14,20 @@ jobs:
         with:
           python-version: 3.8
       - run: pip install -r requirements.txt
-      - run: python main.py
-      - if: git diff --name-only | grep novel_list.json >/dev/null
+      - id: main
+        run: | 
+          OUTPUT = $(python main.py | tail - 1)
+          echo "::set-output name=OUTPUT::$OUTPUT"
+      - if: steps.main.outputs.OUTPUT == "true"
         run: |
           chmod +x kindlegen
           ./kindlegen -unicode content.opf
-      - if: git diff --name-only | grep novel_list.json >/dev/null
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git add novel_list.json
+          git commit -m "update article_list"
+          git push
+      - if: steps.main.outputs.OUTPUT == "true"
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.qq.com
@@ -32,10 +40,3 @@ jobs:
           secure: true
           body: "Job of ${{github.repository}} completed successfully!"
           attachments: content.mobi
-      - if: git diff --name-only | grep novel_list.json >/dev/null
-        run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
-          git add novel_list.json
-          git commit -m "update article_list"
-          git push

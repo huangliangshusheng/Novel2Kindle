@@ -1,6 +1,5 @@
 import json
 import os
-from typing import Collection
 from urllib.parse import urljoin
 
 import cchardet as chardet

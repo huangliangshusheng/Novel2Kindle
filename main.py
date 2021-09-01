@@ -1,5 +1,6 @@
 import json
 import os
+from typing import Collection
 from urllib.parse import urljoin
 
 import cchardet as chardet
@@ -52,11 +53,14 @@ def get_chapter_content(url, content_xpath):
     html = get_html(url)
     parser = etree.HTML(html)
     paragraph_list = parser.xpath(content_xpath)
-    content = "<br>".join(
-        map(
-            lambda str: f"<p>&nbsp;&nbsp;&nbsp;&nbsp;{str.strip()}</p>", paragraph_list
-        ))
-    return paragraph_list[0].strip(), content
+    content_list = tuple(
+        line for paragraph in paragraph_list if (line := paragraph.strip())
+    )
+    description = content_list[0]
+    content = "<br>".join((
+        f"<p>&nbsp;&nbsp;{line}</p>" for line in content_list
+    ))
+    return description, content
 
 
 def get_section(novel):

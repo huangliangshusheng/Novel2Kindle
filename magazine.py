@@ -5,80 +5,108 @@ from typing import List
 class Article():
 
     def __init__(self, id: str, title: str, description: str):
-        self.id = id
-        self.title = title
-        self.description = description
+        self._id = id
+        self._title = title
+        self._description = description
 
-    def write_to_html(self, content: str):
-        html = f'''
-        <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-            <head>
-                <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Content-Type" />
-                <title>{self.title}</title>
-            </head>
-            <body>
-                <div id="section1"></div>
-                <h1 id="title1" height="1em">
-                    <font size="7">
-                        <b>{self.title}</b>
-                    </font>
-                </h1>
-                <br>
-                {content}
-            </body>
-        </html>'''
-
-        filename = f"html/{self.id}.html"
-        with open(filename, mode='w', encoding="utf-8") as f:
-            f.write(html)
-
-    def to_opf(self):
-        item = f"<item href='html/{self.id}.html' media-type='application/xhtml+xml' id='{self.id}'/>"
-        itemref = f"<itemref idref='{self.id}'/>"
+    def _to_opf(self):
+        item = f"<item href='html/{self._id}.html' media-type='application/xhtml+xml' id='{self._id}'/>"
+        itemref = f"<itemref idref='{self._id}'/>"
         return item, itemref
 
-    def to_toc_ncx(self):
+    def _to_toc_ncx(self):
         return f'''
         <navPoint class="article">
             <navLabel>
-                <text>{self.title}</text>
+                <text>{self._title}</text>
             </navLabel>
-            <content src="html/{self.id}.html#title1" />
-            <mbp:meta name="description">{self.description}</mbp:meta>
+            <content src="html/{self._id}.html#title1" />
+            <mbp:meta name="description">{self._description}</mbp:meta>
         </navPoint>'''
 
-    def to_toc_html(self):
-        return f"<li><a href='{self.id}.html'>{self.title}</a></li>"
+    def _to_toc_html(self):
+        return f"<li><a href='{self._id}.html'>{self._title}</a></li>"
+
+    def write_to_html(self, content: str):
+        html = f'''
+            <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+                <head>
+                    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Content-Type" />
+                    <title>{self._title}</title>
+                </head>
+                <body>
+                    <div id="section1"></div>
+                    <h1 id="title1" height="1em">
+                        <font size="7">
+                            <b>{self._title}</b>
+                        </font>
+                    </h1>
+                    <br>
+                    {content}
+                </body>
+            </html>'''
+
+        filename = f"html/{self._id}.html"
+        with open(filename, mode='w', encoding="utf-8") as f:
+            f.write(html)
 
 
 class Section():
 
     def __init__(self, title: str):
-        self.title = title
-        self.article_list: List[Article] = []
+        self._title = title
+        self._article_list: List[Article] = []
 
-    def append_article(self, article: Article):
-        self.article_list.append(article)
+    def __setitem__(self, key, value):
+        self._article_list[key] = value
 
-    def to_toc_ncx(self):
+    def __getitem__(self, key):
+        return self._article_list[key]
+
+    def __delitem__(self, key):
+        del self._article_list[key]
+
+    def __len__(self):
+        return len(self._article_list)
+
+    def __iter__(self):
+        return self._article_list
+
+    def __contains__(self, key):
+        return key in self._article_list
+
+    def __reversed__(self):
+        return list(reversed(self._article_list))
+
+    def append(self, article):
+        if article:
+            self._article_list.append(article)
+
+    def _to_toc_ncx(self):
+        if len(self._article_list) == 0:
+            return ""
+
         toc = "\n".join([
-            article.to_toc_ncx() for article in self.article_list
+            article._to_toc_ncx() for article in self._article_list
         ])
         return f'''
         <navPoint class="section">
             <navLabel>
-                <text>{self.title}</text>
+                <text>{self._title}</text>
             </navLabel>
-            <content src="html/{self.article_list[0].id}.html#section1" />
+            <content src="html/{self._article_list[0]._id}.html#section1" />
             {toc}
         </navPoint>'''
 
-    def to_toc_html(self):
+    def _to_toc_html(self):
+        if len(self._article_list) == 0:
+            return ""
+
         toc = "\n".join([
-            article.to_toc_html() for article in self.article_list
+            article._to_toc_html() for article in self._article_list
         ])
         return f'''
-        <h4 height="1em">{self.title}</h4>
+        <h4 height="1em">{self._title}</h4>
         <ul>
             {toc}
         </ul>'''
@@ -87,33 +115,54 @@ class Section():
 class Magazine():
 
     def __init__(self, title: str):
-        self.title = title
-        self.section_list: List[Section] = []
-        self.id = time.time_ns()
-        self.now = time.strftime("%Y-%m-%d")
+        self._title = title
+        self._section_list: List[Section] = []
+        self._id = time.time_ns()
+        self._now = time.strftime("%Y-%m-%d")
 
-    def append_section(self, section: Section):
-        if len(section.article_list) > 0:
-            self.section_list.append(section)
+    def __setitem__(self, key, value):
+        self._section_list[key] = value
+
+    def __getitem__(self, key):
+        return self._section_list[key]
+
+    def __delitem__(self, key):
+        del self._section_list[key]
+
+    def __len__(self):
+        return len(self._section_list)
+
+    def __iter__(self):
+        return self._section_list
+
+    def __contains__(self, key):
+        return key in self._section_list
+
+    def __reversed__(self):
+        return list(reversed(self._section_list))
+
+    def append(self, section: Section):
+        if section:
+            self._section_list.append(section)
 
     def write_to_opf(self):
         item, itemref = map(
             lambda list: "\n".join(list),
             zip(*(
-                article.to_opf() for section in self.section_list for article in section.article_list
+                article._to_opf() for section in self._section_list for article in section._article_list
             ))
         )
 
         opf = f'''
         <?xml version='1.0' encoding='utf-8'?>
-        <package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="{self.id}">
+        <package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="{self._id}">
         <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
             <dc-metadata>
-                <dc:title>{self.title} {self.now}</dc:title>
+                <dc:title>{self._title} {self._now}</dc:title>
                 <dc:language>zh-CN</dc:language>
                 <dc:subject>杂志</dc:subject>
-                <dc:Identifier id="uid">{self.id}</dc:Identifier>
-                <dc:date>{self.now}</dc:date>
+                <dc:Identifier id="uid">{self._id}</dc:Identifier>
+                <dc:date>{self._now}</dc:date>
             </dc-metadata>
             <x-metadata>
                 <output content-type="application/x-mobipocket-subscription-magazine" encoding="utf-8"/>
@@ -140,20 +189,20 @@ class Magazine():
 
     def write_toc_ncx(self):
         point = "\n".join([
-            section.to_toc_ncx() for section in self.section_list
+            section._to_toc_ncx() for section in self._section_list
         ])
         toc = f'''
         <?xml version='1.0' encoding='utf-8'?>
         <!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
         <ncx xmlns:mbp="http://mobipocket.com/ns/mbp" xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="en-GB">
             <head>
-                <meta content="{self.id}" name="dtb:uid" />
+                <meta content="{self._id}" name="dtb:uid" />
                 <meta content="2" name="dtb:depth" />
                 <meta content="0" name="dtb:totalPageCount" />
                 <meta content="0" name="dtb:maxPageNumber" />
             </head>
             <docTitle>
-                <text>{self.title}</text>
+                <text>{self._title}</text>
             </docTitle>
             <navMap>
                 <navPoint class="periodical">
@@ -171,7 +220,7 @@ class Magazine():
 
     def write_toc_html(self):
         ul = "\n".join([
-            section.to_toc_html() for section in self.section_list
+            section._to_toc_html() for section in self._section_list
         ])
         toc = f'''
         <html>

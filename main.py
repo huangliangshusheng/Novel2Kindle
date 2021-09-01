@@ -1,6 +1,5 @@
 import json
 import os
-import time
 from urllib.parse import urljoin
 
 import cchardet as chardet
@@ -57,7 +56,7 @@ def get_chapter_content(url, content_xpath):
         map(
             lambda str: f"<p>&nbsp;&nbsp;&nbsp;&nbsp;{str.strip()}</p>", paragraph_list
         ))
-    return paragraph_list[0], content
+    return paragraph_list[0].strip(), content
 
 
 def get_section(novel):
@@ -77,9 +76,9 @@ def get_section(novel):
 
         article.write_to_html(content)
 
-        section.append_article(article)
+        section.append(article)
 
-    novel["last_chapter_index"] += len(section.article_list)
+    novel["last_chapter_index"] += len(section)
 
     return section
 
@@ -94,9 +93,9 @@ if __name__ == "__main__":
     novel_list = setting["novel_list"]
 
     for novel in novel_list:
-        magazine.append_section(get_section(novel))
+        magazine.append(get_section(novel))
 
-    if len(magazine.section_list) > 0:
+    if len(magazine) > 0:
         magazine.write_to_opf()
         magazine.write_toc_ncx()
         magazine.write_toc_html()

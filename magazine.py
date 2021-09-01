@@ -15,13 +15,14 @@ class Article():
         return item, itemref
 
     def _to_toc_ncx(self):
+        description = self._description if self._description else self._title
         return f'''
         <navPoint class="article">
             <navLabel>
                 <text>{self._title}</text>
             </navLabel>
             <content src="html/{self._id}.html#title1" />
-            <mbp:meta name="description">{self._description}</mbp:meta>
+            <mbp:meta name="description">{description}</mbp:meta>
         </navPoint>'''
 
     def _to_toc_html(self):

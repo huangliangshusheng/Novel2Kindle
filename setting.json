@@ -6,63 +6,63 @@
             "url": "https://www.xuanshu.com/book/13216/",
             "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
             "content_xpath": "//div[@id='content1']/text()",
-            "last_chapter_index": 1400
+            "last_chapter_index": 1404
         },
         {
             "title": "不会真有人在废土当偶像吧",
             "url": "https://www.230book.net/book/22944/",
             "chapter_xpath": "//ul[@class='_chapter']/li/a",
             "content_xpath": "//div[@id='content']/text()",
-            "last_chapter_index": 293
+            "last_chapter_index": 300
         },
         {
             "title": "我真的好怕啊！",
             "url": "https://www.230book.net/book/26778/",
             "chapter_xpath": "//ul[@class='_chapter']/li/a",
             "content_xpath": "//div[@id='content']/text()",
-            "last_chapter_index": 133
+            "last_chapter_index": 140
         },
         {
             "title": "乱穿是一种病",
             "url": "https://www.xuanshu.com/book/87701/",
             "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
             "content_xpath": "//div[@id='content1']/text()",
-            "last_chapter_index": 143
+            "last_chapter_index": 147
         },
         {
             "title": "盖世双谐",
             "url": "https://www.biquwx.la/12_12313/",
             "chapter_xpath": "//div[@id='list']//a",
             "content_xpath": "//div[@id='content']/text()",
-            "last_chapter_index": 274
+            "last_chapter_index": 275
         },
         {
             "title": "我必将加冕为王",
             "url": "https://www.230book.net/book/12602/",
             "chapter_xpath": "//ul[@class='_chapter']/li/a",
             "content_xpath": "//div[@id='content']/text()",
-            "last_chapter_index": 614
+            "last_chapter_index": 618
         },
         {
             "title": "余烬之铳",
             "url": "https://www.xuanshu.com/book/62835/",
             "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
             "content_xpath": "//div[@id='content1']/text()",
-            "last_chapter_index": 777
+            "last_chapter_index": 781
         },
         {
             "title": "太阳系：异化",
             "url": "https://www.xuanshu.com/book/81791/",
             "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
             "content_xpath": "//div[@id='content1']/text()",
-            "last_chapter_index": 194
+            "last_chapter_index": 196
         },
         {
             "title": "异常收藏家",
             "url": "https://www.xuanshu.com/book/89343/",
             "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
             "content_xpath": "//div[@id='content1']/text()",
-            "last_chapter_index": 102
+            "last_chapter_index": 110
         },
         {
             "title": "降魔专家",
@@ -76,14 +76,14 @@
             "url": "https://www.xuanshu.com/book/89856/",
             "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
             "content_xpath": "//div[@id='content1']/text()",
-            "last_chapter_index": 86
+            "last_chapter_index": 98
         },
         {
             "title": "道祖是克苏鲁",
             "url": "https://www.xuanshu.com/book/88037/",
             "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
             "content_xpath": "//div[@id='content1']/text()",
-            "last_chapter_index": 129
+            "last_chapter_index": 133
         },
         {
             "title": "地煞七十二变",

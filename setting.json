@@ -84,6 +84,13 @@
             "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
             "content_xpath": "//div[@id='content1']/text()",
             "last_chapter_index": 129
+        },
+        {
+            "title": "地煞七十二变",
+            "url": "https://www.xuanshu.com/book/30855/",
+            "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
+            "content_xpath": "//div[@id='content1']/text()",
+            "last_chapter_index": 261
         }
     ]
 }

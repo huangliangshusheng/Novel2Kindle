@@ -1,1 +1,103 @@
-{"title": "Novel", "novel_list": [{"title": "黎明之剑", "url": "https://www.xuanshu.com/book/13216/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 1405}, {"title": "不会真有人在废土当偶像吧", "url": "https://www.230book.net/book/22944/", "chapter_xpath": "//ul[@class='_chapter']/li/a", "content_xpath": "//div[@id='content']/text()", "last_chapter_index": 302}, {"title": "我真的好怕啊！", "url": "https://www.230book.net/book/26778/", "chapter_xpath": "//ul[@class='_chapter']/li/a", "content_xpath": "//div[@id='content']/text()", "last_chapter_index": 141}, {"title": "乱穿是一种病", "url": "https://www.xuanshu.com/book/87701/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 148}, {"title": "盖世双谐", "url": "https://www.biquwx.la/12_12313/", "chapter_xpath": "//div[@id='list']//a", "content_xpath": "//div[@id='content']/text()", "last_chapter_index": 275}, {"title": "我必将加冕为王", "url": "https://www.230book.net/book/12602/", "chapter_xpath": "//ul[@class='_chapter']/li/a", "content_xpath": "//div[@id='content']/text()", "last_chapter_index": 619}, {"title": "余烬之铳", "url": "https://www.xuanshu.com/book/62835/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 782}, {"title": "太阳系：异化", "url": "https://www.xuanshu.com/book/81791/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 196}, {"title": "异常收藏家", "url": "https://www.xuanshu.com/book/89343/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 113}, {"title": "降魔专家", "url": "https://www.xuanshu.com/book/74508/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 118}, {"title": "黎明之劫", "url": "https://www.xuanshu.com/book/89856/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 101}, {"title": "道祖是克苏鲁", "url": "https://www.xuanshu.com/book/88037/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 134}, {"title": "地煞七十二变", "url": "https://www.xuanshu.com/book/30855/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 262}]}
+{
+    "title": "Novel",
+    "novel_list": [
+        {
+            "title": "黎明之剑",
+            "url": "https://www.xuanshu.com/book/13216/",
+            "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
+            "content_xpath": "//div[@id='content1']/text()",
+            "last_chapter_index": 1405
+        },
+        {
+            "title": "不会真有人在废土当偶像吧",
+            "url": "https://www.230book.net/book/22944/",
+            "chapter_xpath": "//ul[@class='_chapter']/li/a",
+            "content_xpath": "//div[@id='content']/text()",
+            "last_chapter_index": 302
+        },
+        {
+            "title": "我真的好怕啊！",
+            "url": "https://www.230book.net/book/26778/",
+            "chapter_xpath": "//ul[@class='_chapter']/li/a",
+            "content_xpath": "//div[@id='content']/text()",
+            "last_chapter_index": 141
+        },
+        {
+            "title": "乱穿是一种病",
+            "url": "https://www.xuanshu.com/book/87701/",
+            "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
+            "content_xpath": "//div[@id='content1']/text()",
+            "last_chapter_index": 148
+        },
+        {
+            "title": "盖世双谐",
+            "url": "https://www.biquwx.la/12_12313/",
+            "chapter_xpath": "//div[@id='list']//a",
+            "content_xpath": "//div[@id='content']/text()",
+            "last_chapter_index": 275
+        },
+        {
+            "title": "我必将加冕为王",
+            "url": "https://www.230book.net/book/12602/",
+            "chapter_xpath": "//ul[@class='_chapter']/li/a",
+            "content_xpath": "//div[@id='content']/text()",
+            "last_chapter_index": 619
+        },
+        {
+            "title": "余烬之铳",
+            "url": "https://www.xuanshu.com/book/62835/",
+            "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
+            "content_xpath": "//div[@id='content1']/text()",
+            "last_chapter_index": 782
+        },
+        {
+            "title": "太阳系：异化",
+            "url": "https://www.xuanshu.com/book/81791/",
+            "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
+            "content_xpath": "//div[@id='content1']/text()",
+            "last_chapter_index": 196
+        },
+        {
+            "title": "异常收藏家",
+            "url": "https://www.xuanshu.com/book/89343/",
+            "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
+            "content_xpath": "//div[@id='content1']/text()",
+            "last_chapter_index": 113
+        },
+        {
+            "title": "降魔专家",
+            "url": "https://www.xuanshu.com/book/74508/",
+            "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
+            "content_xpath": "//div[@id='content1']/text()",
+            "last_chapter_index": 118
+        },
+        {
+            "title": "黎明之劫",
+            "url": "https://www.xuanshu.com/book/89856/",
+            "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
+            "content_xpath": "//div[@id='content1']/text()",
+            "last_chapter_index": 101
+        },
+        {
+            "title": "道祖是克苏鲁",
+            "url": "https://www.xuanshu.com/book/88037/",
+            "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
+            "content_xpath": "//div[@id='content1']/text()",
+            "last_chapter_index": 134
+        },
+        {
+            "title": "地煞七十二变",
+            "url": "https://www.xuanshu.com/book/30855/",
+            "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
+            "content_xpath": "//div[@id='content1']/text()",
+            "last_chapter_index": 262
+        },
+        {
+            "title": "星空之上",
+            "url": "https://www.xuanshu.com/book/87848/",
+            "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
+            "content_xpath": "//div[@id='content1']/text()",
+            "last_chapter_index": 84
+        }
+    ]
+}

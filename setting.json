@@ -1,1 +1,151 @@
-{"title": "Novel", "novel_list": [{"title": "黎明之剑", "url": "https://www.xuanshu.com/book/13216/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 1409}, {"title": "不会真有人在废土当偶像吧", "url": "https://www.230book.net/book/22944/", "chapter_xpath": "//ul[@class='_chapter']/li/a", "content_xpath": "//div[@id='content']/text()", "last_chapter_index": 309}, {"title": "我真的好怕啊！", "url": "https://www.230book.net/book/26778/", "chapter_xpath": "//ul[@class='_chapter']/li/a", "content_xpath": "//div[@id='content']/text()", "last_chapter_index": 147}, {"title": "乱穿是一种病", "url": "https://www.xuanshu.com/book/87701/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 152}, {"title": "盖世双谐", "url": "https://www.biquwx.la/12_12313/", "chapter_xpath": "//div[@id='list']//a", "content_xpath": "//div[@id='content']/text()", "last_chapter_index": 276}, {"title": "我必将加冕为王", "url": "https://www.230book.net/book/12602/", "chapter_xpath": "//ul[@class='_chapter']/li/a", "content_xpath": "//div[@id='content']/text()", "last_chapter_index": 623}, {"title": "余烬之铳", "url": "https://www.xuanshu.com/book/62835/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 786}, {"title": "太阳系：异化", "url": "https://www.xuanshu.com/book/81791/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 200}, {"title": "异常收藏家", "url": "https://www.xuanshu.com/book/89343/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 121}, {"title": "降魔专家", "url": "https://www.xuanshu.com/book/74508/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 118}, {"title": "黎明之劫", "url": "https://www.xuanshu.com/book/89856/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 111}, {"title": "道祖是克苏鲁", "url": "https://www.xuanshu.com/book/88037/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 140}, {"title": "地煞七十二变", "url": "https://www.xuanshu.com/book/30855/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 263}, {"title": "星空之上", "url": "https://www.xuanshu.com/book/87848/", "chapter_xpath": "//div[@class='pc_list']/ul/li/a", "content_xpath": "//div[@id='content1']/text()", "last_chapter_index": 89}]}
+{
+    "title": "Novel",
+    "domain_list": [
+        {
+            "domain": "xuanshu",
+            "chapter_xpath": "//div[@class='pc_list']/ul/li/a",
+            "content_xpath": "//div[@id='content1']/text()",
+            "novel_list": [
+                {
+                    "title": "黎明之剑",
+                    "url": "https://www.xuanshu.com/book/13216/",
+                    "last_index": 1410
+                },
+                {
+                    "title": "乱穿是一种病",
+                    "url": "https://www.xuanshu.com/book/87701/",
+                    "last_index": 153
+                },
+                {
+                    "title": "余烬之铳",
+                    "url": "https://www.xuanshu.com/book/62835/",
+                    "last_index": 786
+                },
+                {
+                    "title": "太阳系：异化",
+                    "url": "https://www.xuanshu.com/book/81791/",
+                    "last_index": 201
+                },
+                {
+                    "title": "异常收藏家",
+                    "url": "https://www.xuanshu.com/book/89343/",
+                    "last_index": 122
+                },
+                {
+                    "title": "降魔专家",
+                    "url": "https://www.xuanshu.com/book/74508/",
+                    "last_index": 16
+                },
+                {
+                    "title": "黎明之劫",
+                    "url": "https://www.xuanshu.com/book/89856/",
+                    "last_index": 112
+                },
+                {
+                    "title": "道祖是克苏鲁",
+                    "url": "https://www.xuanshu.com/book/88037/",
+                    "last_index": 142
+                },
+                {
+                    "title": "地煞七十二变",
+                    "url": "https://www.xuanshu.com/book/30855/",
+                    "last_index": 264
+                },
+                {
+                    "title": "星空之上",
+                    "url": "https://www.xuanshu.com/book/87848/",
+                    "last_index": 90
+                }
+            ]
+        },
+        {
+            "domain": "230book",
+            "chapter_xpath": "//ul[@class='_chapter']/li/a",
+            "content_xpath": "//div[@id='content']/text()",
+            "novel_list": [
+                {
+                    "title": "不会真有人在废土当偶像吧",
+                    "url": "https://www.230book.net/book/22944/",
+                    "last_index": 311
+                },
+                {
+                    "title": "我真的好怕啊！",
+                    "url": "https://www.230book.net/book/26778/",
+                    "last_index": 148
+                },
+                {
+                    "title": "我必将加冕为王",
+                    "url": "https://www.230book.net/book/12602/",
+                    "last_index": 623
+                }
+            ]
+        },
+        {
+            "domain": "biquwx",
+            "chapter_xpath": "//div[@id='list']//a",
+            "content_xpath": "//div[@id='content']/text()",
+            "novel_list": [
+                {
+                    "title": "盖世双谐",
+                    "url": "https://www.biquwx.la/12_12313/",
+                    "last_index": 276
+                }
+            ]
+        },
+        {
+            "domain": "wenku",
+            "novel_list": [
+                {
+                    "aid": 855,
+                    "title": "不吉波普系列",
+                    "last_index": 10
+                },
+                {
+                    "aid": 1269,
+                    "title": "游戏人生",
+                    "last_index": 13
+                },
+                {
+                    "aid": 1163,
+                    "title": "古典部系列",
+                    "last_index": 7
+                },
+                {
+                    "aid": 1683,
+                    "title": "安达与岛村",
+                    "last_index": 11
+                },
+                {
+                    "aid": 886,
+                    "title": "小市民系列",
+                    "last_index": 5
+                },
+                {
+                    "aid": 2964,
+                    "title": "沉默的魔女",
+                    "last_index": 1
+                },
+                {
+                    "aid": 2193,
+                    "title": "转生成蜘蛛又怎样！",
+                    "last_index": 15
+                },
+                {
+                    "aid": 1249,
+                    "title": "记录的地平线",
+                    "last_index": 10
+                },
+                {
+                    "aid": 1614,
+                    "title": "青春野狼系列",
+                    "last_index": 12
+                },
+                {
+                    "aid": 2994,
+                    "title": "经验丰富的你和经验为零的我交往的故事",
+                    "last_index": 2
+                }
+            ]
+        }
+    ]
+}

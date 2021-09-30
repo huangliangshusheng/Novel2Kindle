@@ -3,7 +3,6 @@ import os
 import re
 import time
 from collections import namedtuple
-from functools import reduce
 
 import requests
 from lxml import html
@@ -27,80 +26,85 @@ def create_section_list(domain):
     content_pattern = domain["content_pattern"]
 
     if "wenku" == domain["domain"]:
-        create_section = create_wenku_parser(
+        parser = create_wenku_parser(
             chapter_pattern, content_pattern
         )
     else:
-        create_section = create_default_parser(
+        parser = create_default_parser(
             chapter_pattern, content_pattern
         )
 
-    return filter_map(create_section, novel_list)
+    return list(filter_map(
+        lambda novel: create_section(novel, parser),
+        novel_list
+    ))
 
 
 def create_wenku_parser(chapter_pattern, content_pattern):
     content_pattern = re.compile(content_pattern)
 
-    def create_article(id, chapter):
-        title, aid, vid = chapter
-        url = f"https://dl.wenku8.com/packtxt.php?aid={aid}&vid={vid}&charset=utf-8"
+    def parse_novel(aid, last_index):
+        def parse_link(link):
+            title = link.xpath("./child::node()")[0]
+            vid = link.xpath(
+                "./ancestor-or-self::node()/@href"
+            )[0].replace(".htm", "")
+            url = f"https://dl.wenku8.com/packtxt.php?aid={aid}&vid={vid}&charset=utf-8"
 
-        response = fetch(url)
-        text = re.search(content_pattern, response.text).group(1)
-        line_list = text.split("\r\n")
-        content_list = filter_map(lambda line: line.strip(), line_list)
-        if not content_list:
-            return None
+            return title, url
 
-        description = content_list[0]
-        content = "<br>".join(
-            map(lambda line: f"<p>&nbsp;&nbsp;{line}</p>", content_list)
-        )
-        article = Article(id, title, description)
-        write_Article(article, content)
-
-        return article
-
-    def create_section(novel):
-        aid = novel["aid"]
-        title = novel["title"]
-        last_index = novel.get("last_index", -1)
         url = f"https://www.wenku8.net/novel/{aid // 1000}/{aid}/index.htm"
 
         response = fetch(url)
         parser = html.fromstring(response.content)
         link_list = parser.xpath(chapter_pattern)
-        novel["last_index"] = len(link_list)
-        chapter_list = filter_map(
-            lambda link: (
-                link.xpath("./child::node()")[0],
-                aid,
-                link.xpath(
-                    "./ancestor-or-self::node()/@href"
-                )[0].replace(".htm", "")
-            ),
+
+        chapter_list = tuple(filter_map(
+            parse_link,
             link_list[last_index:]
-        )
-        article_list = filter_map(
-            lambda index, chapter: create_article(f"{title}-{index}", chapter),
-            range(len(chapter_list)), chapter_list
-        )
-        if not article_list:
-            return None
+        ))
 
-        return Section(title, article_list)
+        return len(link_list), chapter_list
 
-    return create_section
+    def parse_chapter(url):
+        response = fetch(url)
+        text = re.search(content_pattern, response.text).group(1)
+        return text.split("\r\n")
+
+    return parse_novel, parse_chapter
 
 
 def create_default_parser(chapter_pattern, content_pattern):
-    def create_article(id, chapter):
-        title, url = chapter
-
+    def parse_novel(url, last_index):
         response = fetch(url)
         parser = html.fromstring(response.content)
-        line_list = parser.xpath(content_pattern)
-        content_list = filter_map(lambda line: line.strip(), line_list)
+        parser.make_links_absolute(base_url=url)
+        link_list = parser.xpath(chapter_pattern)
+
+        chapter_list = tuple(filter_map(
+            lambda link: (
+                link.xpath("./child::node()")[0],
+                link.xpath("./ancestor-or-self::node()/@href")[0]
+            ),
+            link_list[last_index:]
+        ))
+
+        return len(link_list), chapter_list
+
+    def parse_chapter(url):
+        response = fetch(url)
+        parser = html.fromstring(response.content)
+        return parser.xpath(content_pattern)
+
+    return parse_novel, parse_chapter
+
+
+def create_section(novel, parser):
+    parse_novel, parse_chapter = parser
+
+    def create_article(id, title, url):
+        line_list = parse_chapter(url)
+        content_list = tuple(filter_map(lambda line: line.strip(), line_list))
         if not content_list:
             return None
 
@@ -108,52 +112,39 @@ def create_default_parser(chapter_pattern, content_pattern):
         content = "<br>".join(
             map(lambda line: f"<p>&nbsp;&nbsp;{line}</p>", content_list)
         )
-        article = Article(id, title, description)
-        write_Article(article, content)
+        write_Article(id, title, content)
 
-        return article
+        return Article(id, title, description)
 
-    def create_section(novel):
-        url = novel["url"]
-        title = novel["title"]
-        last_index = novel.get("last_index", -1)
+    id_or_url = novel["id_or_url"]
+    title = novel["title"]
+    last_index = novel.get("last_index", -1)
 
-        response = fetch(url)
-        parser = html.fromstring(response.content)
-        parser.make_links_absolute(base_url=url)
-        link_list = parser.xpath(chapter_pattern)
-        novel["last_index"] = len(link_list)
-        chapter_list = filter_map(
-            lambda link: (
-                link.xpath("./child::node()")[0],
-                link.xpath("./ancestor-or-self::node()/@href")[0]
-            ),
-            link_list[last_index:]
-        )
-        article_list = filter_map(
-            lambda index, chapter: create_article(f"{title}-{index}", chapter),
-            range(len(chapter_list)), chapter_list
-        )
-        if not article_list:
-            return None
+    last_index, chapter_list = parse_novel(id_or_url, last_index)
+    novel["last_index"] = last_index
 
-        return Section(title, article_list)
+    article_list = tuple(filter_map(
+        lambda index, chapter: create_article(f"{title}-{index}", *chapter),
+        range(len(chapter_list)), chapter_list
+    ))
+    if not article_list:
+        return None
 
-    return create_section
+    return Section(title, article_list)
 
 
-def write_Article(article, content):
+def write_Article(id, title, content):
     html = f'''
             <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
                 <head>
                     <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Content-Type" />
-                    <title>{article.title}</title>
+                    <title>{title}</title>
                 </head>
                 <body>
                     <div id="section1"></div>
                     <h1 id="title1" height="1em">
                         <font size="7">
-                            <b>{article.title}</b>
+                            <b>{title}</b>
                         </font>
                     </h1>
                     <br>
@@ -161,7 +152,7 @@ def write_Article(article, content):
                 </body>
             </html>'''
 
-    filename = f"html/{article.id}.html"
+    filename = f"html/{id}.html"
     write_file(filename, html)
 
 
@@ -306,7 +297,7 @@ def section_to_toc_html(section):
 
 
 def filter_map(func, *iterables):
-    return list(filter(None, map(func, *iterables)))
+    return filter(None, map(func, *iterables))
 
 
 @retry(stop=stop_after_attempt(3), wait=wait_random(min=1, max=3))
